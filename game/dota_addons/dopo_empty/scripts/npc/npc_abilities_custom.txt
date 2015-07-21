@@ -6,7 +6,7 @@
 	"fire_out"
 	{
 		
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_DIRECTIONAL|DOTA_ABILITY_BEHAVIOR_NOASSIST"
 
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
 
@@ -19,23 +19,31 @@
 		"AbilityCooldown"				"10.0 10.0 10.0 10.0"
 
 		"AbilityManaCost"				"0"								//do not cost mana
-		"OnSpellStart"
 
     	"OnSpellStart"
 		{
+
+			"RunScript"
+    		{
+         		"ScriptFile"    		"scripts/vscripts/AbilityList.lua"
+         		"Function"    			"FireOut"
+         		"Target"       	
+         		{
+         			"Types"             "DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
+                    "Teams"             "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Flags"             "DOTA_UNIT_TARGET_FLAG_NONE"
+                    "Center"        	"CASTER"
+                    "Radius"        	"200"
+                }
+    		}
+
     		"Damage"
    			{
         		"Type"        	"DAMAGE_TYPE_PURE"
         		"Damage"   		"100"
         		"Target"      	"TARGET"
    			}
-
-   			"RunScript"
-    		{
-         		"ScriptFile"    "scripts/vscripts/AbilityList.lua"
-         		"Function"    	"FireOut"
-         		"Target"       	"TARGET"
-    		}
+   			
 		}
 	}
 }

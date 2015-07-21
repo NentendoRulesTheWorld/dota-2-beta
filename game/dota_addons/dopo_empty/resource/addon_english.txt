@@ -4,5 +4,9 @@
 	"Tokens"
 	{		
 		"addon_game_name"			"YOUR ADDON NAME"
+		"DOTA_Tooltip_ability_fire_out"        			"Fire"
+        "DOTA_Tooltip_ability_fire_out_Description"		"Hold to expand shoot range"
+        "DOTA_Tooltip_ability_fire_out_Lore"        	"Different bomb have different effect"
+
 	}
 }
