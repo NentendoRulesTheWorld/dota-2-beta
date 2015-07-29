@@ -4,8 +4,8 @@
 	"Tokens"
 	{		
 		"addon_game_name"			"自定义游戏"
-		"DOTA_Tooltip_ability_fire_out"        			"开火"
-        "DOTA_Tooltip_ability_fire_out_Description"		"持续施法越久，炮弹射♂的越远"
-        "DOTA_Tooltip_ability_fire_out_Lore"        	"不同的弹药有不同的效果"
+		"DOTA_Tooltip_Ability_fire_out"        			"开火"
+        "DOTA_Tooltip_Ability_fire_out_Description"		"持续施法越久，炮弹射♂的越远"
+        "DOTA_Tooltip_Ability_fire_out_Lore"        	"不同的弹药有不同的效果"
 	}
 }

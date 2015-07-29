@@ -6,19 +6,23 @@
 	"fire_out"
 	{
 		
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_DIRECTIONAL|DOTA_ABILITY_BEHAVIOR_NOASSIST"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOASSIST"
 
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
 
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
 
-		"BaseClass"                     "ability_datadriven"
+		"BaseClass"                     "ability_datadriven"                   //"ability_datadriven"
 
 		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
 
 		"AbilityCooldown"				"10.0 10.0 10.0 10.0"
 
 		"AbilityManaCost"				"0"								//do not cost mana
+
+        "AbilityCastAnimation"          "ACT_DOTA_ATTACK"               //actionAnimation
+
+        "AbilityTextureName"            "sniper_assassinate"            //ability icon
 
     	"OnSpellStart"
 		{
@@ -27,15 +31,18 @@
     		{
          		"ScriptFile"    		"scripts/vscripts/AbilityList.lua"
          		"Function"    			"FireOut"
-         		"Target"       	
-         		{
-         			"Types"             "DOTA_UNIT_TARGET_BASIC|DOTA_UNIT_TARGET_HERO"
-                    "Teams"             "DOTA_UNIT_TARGET_TEAM_ENEMY"
-                    "Flags"             "DOTA_UNIT_TARGET_FLAG_NONE"
-                    "Center"        	"CASTER"
-                    "Radius"        	"200"
-                }
     		}
+
+            "TrackingProjectile"
+            {
+                 "Target"               "POINT"
+                 "EffectName"           "particles/units/heroes/hero_techies/techies_base_attack.vpcf"
+                 "Dodgeable"            "1"
+                 "ProvidesVision"       "1"
+                 "VisionRadius"         "300"
+                 "MoveSpeed"            "1100"
+                 "SourceAttachment"     "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+            }
 
     		"Damage"
    			{
@@ -46,4 +53,52 @@
    			
 		}
 	}
+
+    "fire_out_lua"
+    {
+        
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOASSIST"
+
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"  
+
+        "BaseClass"                     "ability_lua"                   //"ability_datadriven"
+
+        "ScriptFile"                    "test_lua_ability"
+
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0"
+
+        "AbilityCooldown"               "10.0 10.0 10.0 10.0"
+
+        "AbilityManaCost"               "0"                             //do not cost mana
+
+        "AbilityCastAnimation"          "ACT_DOTA_ATTACK"               //actionAnimation
+
+        "AbilityTextureName"            "sniper_assassinate"            //ability icon
+
+        "AbilitySpecial"                                                //keys -- values
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bolt_speed"            "500"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "aoe_radius"            "200"
+            }
+            "03"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "vision_radius"          "255"
+            }
+            "04"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "aoe_damage"        "100"
+            }
+        }
+    }
 }

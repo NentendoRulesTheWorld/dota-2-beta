@@ -81,7 +81,7 @@ function fire_out_lua:OnChannelFinish( bInterrupted )
 	local bolt_speed = self:GetSpecialValueFor( "bolt_speed" )
 
 	local info = {
-			EffectName = "particles/units/heroes/hero_sven/sven_spell_storm_bolt.vpcf",
+			EffectName = "particles/units/heroes/hero_techies/techies_base_attack.vpcf",
 			Ability = self,
 			iMoveSpeed = bolt_speed,
 			Source = self:GetCaster(),
