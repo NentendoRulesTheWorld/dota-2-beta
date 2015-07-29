@@ -4,10 +4,10 @@ local isDebug = true
 
 function Log:D(info)
 	if isDebug then 
-		print(info)
+		print("DOPO_Debug: " .. info)
 	end
 end
 
 function Log:A(info)
-		print(info)
+		print("DOPO_INFO: " .. info)
 end
