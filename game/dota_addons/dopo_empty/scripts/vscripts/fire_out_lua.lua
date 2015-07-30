@@ -24,7 +24,7 @@ end
 
 function fire_out_lua:OnSpellStart()
 	Log:D("OnSpellStart")
-	startTime = Time();
+	startTime = GameRules:GetGameTime();
 	Log:D(startTime)
 end
 
@@ -38,12 +38,15 @@ end
 
 function fire_out_lua:OnProjectileHit( hTarget, vLocation )
 	Log:D("OnProjectileHit")
-	Log:D(hTarget)
 	Log:D(vLocation)
+
+	local aoe_radius = self:GetSpecialValueFor( "aoe_radius" )
+	local aoe_damage = self:GetSpecialValueFor( "aoe_damage" )
+
 	if vLocation ~= nil then
 		EmitSoundOn( vLocation,"Hero_Sven.StormBoltImpact",self:GetCaster() )
 
-		local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), hTarget:GetOrigin(), hTarget, bolt_aoe, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false )
+		local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), hTarget:GetOrigin(), nil, aoe_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false )
 		if #enemies > 0 then
 			for _,enemy in pairs(enemies) do
 				if enemy ~= nil and ( not enemy:IsMagicImmune() ) and ( not enemy:IsInvulnerable() ) then
@@ -51,8 +54,8 @@ function fire_out_lua:OnProjectileHit( hTarget, vLocation )
 					local damage = {
 						victim = enemy,
 						attacker = self:GetCaster(),
-						damage = bolt_damage,
-						damage_type = DAMAGE_TYPE_MAGICAL,
+						damage = aoe_damage,
+						damage_type = DAMAGE_TYPE_PHYSICAL,
 					}
 
 					ApplyDamage( damage )
@@ -71,27 +74,39 @@ end
 function fire_out_lua:OnChannelFinish( bInterrupted )
 	Log:D("OnChannelFinish")
 	if startTime ~= nil then
-		local intervalTime = Time() - startTime
+		local intervalTime = GameRules:GetGameTime() - startTime
 		startTime = nil
 		Log:D(intervalTime)
 		--DOPO intervalTime calculattion need to rewrite
 	end
 
 	local vision_radius = self:GetSpecialValueFor( "vision_radius" )
-	local bolt_speed = self:GetSpecialValueFor( "bolt_speed" )
+	local projectile_speed = self:GetSpecialValueFor( "projectile_speed" )
+	local distance_ratio = self:GetSpecialValueFor( "distance_ratio" )
+
+	-- local info = {
+	-- 		EffectName = "particles/units/heroes/hero_techies/techies_base_attack.vpcf",
+	-- 		Ability = self,
+	-- 		iMoveSpeed = projectile_speed,
+	-- 		Source = self:GetCaster(),
+	-- 		Target = self:GetCursorTarget(),
+	-- 		bDodgeable = true,
+	-- 		bProvidesVision = true,
+	-- 		iVisionTeamNumber = self:GetCaster():GetTeamNumber(),
+	-- 		iVisionRadius = vision_radius,
+	-- 		iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_2, 
+	-- 	}
 
 	local info = {
-			EffectName = "particles/units/heroes/hero_techies/techies_base_attack.vpcf",
-			Ability = self,
-			iMoveSpeed = bolt_speed,
-			Source = self:GetCaster(),
-			Target = self:GetCursorTarget(),
-			bDodgeable = true,
-			bProvidesVision = true,
-			iVisionTeamNumber = self:GetCaster():GetTeamNumber(),
-			iVisionRadius = vision_radius,
-			iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_2, 
-		}
+		EffectName = "particles/units/heroes/hero_techies/techies_base_attack.vpcf",
+		Ability = self,
+		iMoveSpeed = projectile_speed,
+		Source = self:GetCaster(),
+		bDodgeable = true,
+		bProvidesVision = true,
+		vSpawnOrigin = self:GetCaster():GetOrigin(), 
+		fDistance = distance_ratio*intervalTime
+	}
 
 	ProjectileManager:CreateTrackingProjectile( info )
 	EmitSoundOn( "Hero_Sven.StormBolt", self:GetCaster() )
