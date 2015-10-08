@@ -113,9 +113,9 @@ function Build( event )
 
 		-- Store the Build Time, Gold Cost and secondary resource the building 
 	    -- This is necessary for repair to know what was the cost of the building and use resources periodically
-	    unit.GoldCost = build_time
-	    unit.LumberCost = gold_cost
-	    unit.BuildTime = lumber_cost
+	    unit.GoldCost = gold_cost
+	    unit.LumberCost = lumber_cost
+	    unit.BuildTime = build_time
 
 		-- Give item to cancel
 		local item = CreateItem("item_building_cancel", playersHero, playersHero)
@@ -392,7 +392,8 @@ function Repair( event )
 		end]]
 			
 		local healthGain = 0
-		if PlayerHasEnoughGold( player, math.ceil(gold_per_second+gold_float) ) and PlayerHasEnoughLumber( player, lumber_per_second ) then
+		--hejk remove because repair need not resource
+		if PlayerHasEnoughGold( player, --[[math.ceil(gold_per_second+gold_float)]]0 ) and PlayerHasEnoughLumber( player, --[[lumber_per_second]]0 ) then
 			-- Health
 			building.HPAdjustment = building.HPAdjustment + health_float
 			if building.HPAdjustment > 1 then
@@ -407,15 +408,15 @@ function Repair( event )
 			-- Consume Resources
 			building.GoldAdjustment = building.GoldAdjustment + gold_float
 			if building.GoldAdjustment > 1 then
-				hero:ModifyGold( -gold_per_second - 1, false, 0)
+				-- hero:ModifyGold( -gold_per_second - 1, false, 0)
 				building.GoldAdjustment = building.GoldAdjustment - 1
 				building.gold_used = building.gold_used + gold_per_second + 1
 			else
-				hero:ModifyGold( -gold_per_second, false, 0)
+				-- hero:ModifyGold( -gold_per_second, false, 0)
 				building.gold_used = building.gold_used + gold_per_second
 			end
 			
-			ModifyLumber( player, -lumber_per_second )
+			-- ModifyLumber( player, -lumber_per_second )
 			building.lumber_used = building.lumber_used + lumber_per_second
 		else
 			-- Remove the modifiers on the building and the builders

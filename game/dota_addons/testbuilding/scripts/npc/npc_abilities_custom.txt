@@ -950,4 +950,120 @@
 			}
 		}
 	}
+
+	//hejk add
+	"build_farm"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"build_farm"
+		"MaxLevel" 						"1"
+	
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	
+		// BuildingHelper info
+		"Building"						"1" //bool
+		"BuildingSize"					"4" 
+		"BuildTime"						"10.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1" //bool
+		"Scale"							"0" //bool
+		"PlayerCanControl"				"1" //bool
+	
+		"RequiresRepair"				"1"
+	
+		"UnitName"						"farm"
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"100"
+		// End of BuildingHelper info
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"build_time"			"10.0"	
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"gold_cost"				"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"lumber_cost"			"100"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+	}
+
+	"build_barracks"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"build_barracks"
+		"MaxLevel" 						"1"
+	
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+	
+		// BuildingHelper info
+		"Building"						"1" //bool
+		"BuildingSize"					"5"
+		"BuildTime"						"15.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1" //bool
+		"Scale"							"0" //bool
+		"PlayerCanControl"				"1" //bool
+	
+		"RequiresRepair"				"1"
+		"ModelRotation"					"90.0"
+	
+		"UnitName"						"barracks"
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"100"
+		// End of BuildingHelper info
+	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"build_time"			"15.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"gold_cost"				"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"lumber_cost"			"100"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+	}
+
+	"build_barracks_disabled"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"build_barracks"
+		"MaxLevel" 						"0"
+	}
 }

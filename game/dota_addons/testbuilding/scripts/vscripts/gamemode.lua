@@ -1,6 +1,11 @@
 
 DEBUG_SPEW = 1
 
+--hejk add to contain playerID
+if _G.playerTable == nil then
+	_G.playerTable = {}
+end
+
 function CustomGameMode:InitGameMode()
 
 	-- Get Rid of Shop button - Change the UI Layout if you want a shop button
@@ -13,7 +18,7 @@ function CustomGameMode:InitGameMode()
 	-- Event Hooks
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(CustomGameMode, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(CustomGameMode, 'OnPlayerPickHero'), self)
-
+	ListenToGameEvent('player_connect_full', Dynamic_Wrap(CustomGameMode, 'OnPlayerConnectFull'), self)
 	-- Filters
     GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( CustomGameMode, "FilterExecuteOrder" ), self )
 
@@ -35,8 +40,18 @@ function CustomGameMode:InitGameMode()
 
 	-- Keeps the blighted gridnav positions
 	GameRules.Blight = {}
+
+	--hejk add for listen gamestate
+	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+  	GameRules:SetHeroSelectionTime(1);
 end
 
+--hejk add for force add hero
+function CustomGameMode:OnPlayerConnectFull(keys)
+    local player = PlayerInstanceFromIndex(keys.index + 1)
+    table.insert(_G.playerTable, player)
+    print("add this player into playerTable"..keys.index..tostring(player))
+end
 -- A player picked a hero
 function CustomGameMode:OnPlayerPickHero(keys)
 
@@ -54,10 +69,7 @@ function CustomGameMode:OnPlayerPickHero(keys)
     -- Create city center in front of the hero
     local position = hero:GetAbsOrigin() + hero:GetForwardVector() * 300
     local city_center_name = "city_center"
-	local building = BuildingHelper:PlaceBuilding(player, city_center_name, position, true, 5) 
-
-	-- Set health to test repair
-	building:SetHealth(building:GetMaxHealth()/3)
+	local building = BuildingHelper:PlaceBuilding(player, city_center_name, Vector(11000,11000,0), true, 5) 
 
 	-- These are required for repair to know how many resources the building takes
 	building.GoldCost = 100
@@ -75,23 +87,24 @@ function CustomGameMode:OnPlayerPickHero(keys)
 	table.insert(player.units, hero)
 	hero.state = "idle" --Builder state
 
+	-- hejk remove because only need hero
 	-- Spawn some peasants around the hero
-	local position = hero:GetAbsOrigin()
-	local numBuilders = 5
-	local angle = 360/numBuilders
-	for i=1,5 do
-		local rotate_pos = position + Vector(1,0,0) * 100
-		local builder_pos = RotatePosition(position, QAngle(0, angle*i, 0), rotate_pos)
+	-- local position = hero:GetAbsOrigin()
+	-- local numBuilders = 5
+	-- local angle = 360/numBuilders
+	-- for i=1,5 do
+	-- 	local rotate_pos = position + Vector(1,0,0) * 100
+	-- 	local builder_pos = RotatePosition(position, QAngle(0, angle*i, 0), rotate_pos)
 
-		local builder = CreateUnitByName("peasant", builder_pos, true, hero, hero, hero:GetTeamNumber())
-		builder:SetOwner(hero)
-		builder:SetControllableByPlayer(playerID, true)
-		table.insert(player.units, builder)
-		builder.state = "idle"
+	-- 	local builder = CreateUnitByName("peasant", builder_pos, true, hero, hero, hero:GetTeamNumber())
+	-- 	builder:SetOwner(hero)
+	-- 	builder:SetControllableByPlayer(playerID, true)
+	-- 	table.insert(player.units, builder)
+	-- 	builder.state = "idle"
 
-		-- Go through the abilities and upgrade
-		CheckAbilityRequirements( builder, player )
-	end
+	-- 	-- Go through the abilities and upgrade
+	-- 	CheckAbilityRequirements( builder, player )
+	-- end
 
 	-- Give Initial Resources
 	hero:SetGold(5000, false)
@@ -99,13 +112,13 @@ function CustomGameMode:OnPlayerPickHero(keys)
 
 	-- Lumber tick
 	Timers:CreateTimer(1, function()
-		ModifyLumber(player, 10)
+		ModifyLumber(player, 1)
 		return 10
 	end)
 
 	-- Give a building ability
-	local item = CreateItem("item_build_wall", hero, hero)
-	hero:AddItem(item)
+	-- local item = CreateItem("item_build_wall", hero, hero)
+	-- hero:AddItem(item)
 
 	-- Learn all abilities (this isn't necessary on creatures)
 	for i=0,15 do
@@ -194,4 +207,45 @@ function CustomGameMode:OnPlayerSelectedEntities( event )
 		local player = PlayerResource:GetPlayer(pID)
 		player.activeBuilder = mainSelected
 	end
+end
+
+--hejk add for listen gamestate
+-- Evaluate the state of the game
+function CustomGameMode:OnThink()
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_HERO_SELECTION then
+	print("hero selection"..#_G.playerTable)
+	for k,player in pairs(_G.playerTable) do
+		if player:GetAssignedHero() then
+			print("this player already has a hero"..player:GetPlayerID())
+		else
+			print("Creating hero."..player:GetTeamNumber())
+			local hero = nil
+		    if player:GetTeamNumber()==2 then --good guys
+		    	hero = CreateHeroForPlayer('npc_dota_hero_kunkka', player)
+		    elseif player:GetTeamNumber()==3 then --bad guys
+		    	hero = CreateHeroForPlayer('npc_dota_hero_pudge', player)
+		    else
+		    	print("TeamNumber is wrong")
+		    end
+		    hero:SetContextThink("hero_assign"..tostring(player),
+		        function()
+		            if hero:GetPlayerOwnerID() == -1 then
+		                local id = hero:GetPlayerOwner():GetPlayerID()
+		                if id ~= -1 then
+		                    print("Reconnecting hero for player " .. id)
+		                    hero:SetControllableByPlayer(id, true)
+		                    hero:SetPlayerID(id)
+		                    return nil
+		                end
+		            end
+		            return 1
+		        end,
+		   1)
+		end
+	end
+	elseif GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
+		return nil
+	end
+	return 1
 end

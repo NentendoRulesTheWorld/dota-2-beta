@@ -34,6 +34,19 @@ function Precache( context )
 
 	PrecacheItemByNameSync("item_apply_modifiers", context)
 
+	--hejk add for new unit
+
+	--hejk add for override skills
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_antimage", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_lina", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_magnataur", context)
+	
+	--hejk add for hero model&sound
+	
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_vo_pudge.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_vo_kunkka.vsndevts", context )
 end
 
 -- Create our game mode and initialize it

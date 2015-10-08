@@ -3,19 +3,32 @@
 	"npc_dota_hero_kunkka"
 	{
 		"override_hero"				"npc_dota_hero_kunkka"
-	
+		
+		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl"
 		"UnitLabel"					"builder"
 	
 		"AbilityLayout"				"6"
 		"Ability1" 					"repair"
-		"Ability2" 					"build_tower"
-		"Ability3" 					"build_city_center"
-		"Ability4" 					"build_tech_center"
-		"Ability5"					"build_dragon_tower"
+		"Ability2" 					"antimage_blink"
+		"Ability3" 					"build_farm"
+		"Ability4" 					"build_barracks"
+		"Ability5"					"lina_light_strike_array"
 		"Ability6" 					"ultimate_ability"
-		"Ability7"					""
-		"Ability8"					""
-		"Ability9"					""
-		"Ability10"					""
+		
+	}
+
+	"npc_dota_hero_pudge"
+	{
+		"override_hero"				"npc_dota_hero_pudge"
+	
+		"Model"						"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+		"UnitLabel"					"seeker"
+	
+		"AbilityLayout"				"4"
+		"Ability1" 					"magnataur_shockwave"
+		"Ability2" 					""
+		"Ability3" 					""
+		"Ability4" 					""
+		
 	}
 }

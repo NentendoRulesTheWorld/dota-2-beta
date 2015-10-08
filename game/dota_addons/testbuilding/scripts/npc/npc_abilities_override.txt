@@ -3,8 +3,26 @@
 "DOTAAbilities"
 {
 	"Version"		"1"
-	
-  
+	"antimage_blink"
+	{
+		"AbilityCooldown"		"20 20 20 20"
+        "AbilityManaCost"		"0 0 0 0"  
+	}
+	  
+  	"lina_light_strike_array"
+	{
+		"AbilityCooldown"		"10 10 10 10"
+        "AbilityManaCost"		"50 50 50 50"
+        "AbilityDamage"			"0 0 0 0"  
+	}
+
+	"magnataur_shockwave"
+	{
+		"AbilityCooldown"		"10 10 10 10"
+        "AbilityManaCost"		"100 100 100 100"
+        "AbilityDamage"			"500 500 500 500"  
+	}
+
   // -----------------------------------------------------------
   // - UNCOMMENT ANY ITEM YOU DON'T WANT TO APPEAR IN THE SHOP -
   // -----------------------------------------------------------
