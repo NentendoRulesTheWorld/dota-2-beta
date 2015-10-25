@@ -1,0 +1,29 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/custom_game/tetris.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/tetris.js" />
+	</scripts>
+	<script>
+		$.Msg( "Compiled Panorama Resource!" );
+	</script>
+	<Panel hittest="false" class="BasePanel">
+        <Panel class="backgroundPanel">
+            <Panel class="TetrisPanel"/>
+        </Panel>
+    	<Panel class="NextTetrisPanel"/>
+        
+        <!--    <Panel hittest="false" id="SheapsPanel1"/>
+            
+            <Panel hittest="false" id="SheapsPanel2"/>
+            <Panel hittest="false" id="SheapsPanel3"/>
+            <Panel hittest="false" id="SheapsPanel4"/> --> 
+    	<!--	<Panel hittest="false" id="SheapsPanel1"/>
+    		
+    	 	<Panel hittest="false" id="SheapsPanel2"/>
+    		<Panel hittest="false" id="SheapsPanel3"/>
+    		<Panel hittest="false" id="SheapsPanel4"/> --> 
+    </Panel>
+    
+</root>

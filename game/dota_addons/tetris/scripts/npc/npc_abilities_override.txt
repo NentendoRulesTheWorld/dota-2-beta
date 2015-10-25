@@ -1,0 +1,42 @@
+
+// Dota Abilities Override File
+"DOTAAbilities"
+{
+	"Version"		"1"
+	"dazzle_shadow_wave"
+	{
+		"AbilityCastRange"		"15000"
+		"AbilityCooldown"		"0.3"
+        "AbilityManaCost"		"0 0 0 0"  
+        "AbilityGoldCost"		"100 120 140 160"  
+	}
+	"abaddon_aphotic_shield"
+	{
+		"AbilityCastRange"		"15000"
+		"AbilityCooldown"		"0.3"
+        "AbilityManaCost"		"0 0 0 0"  
+        "AbilityGoldCost"		"100 120 140 160"  
+	}
+	"leshrac_lightning_storm"
+	{
+		"AbilityCastRange"		"15000"
+		"AbilityCooldown"		"0.3"
+        "AbilityManaCost"		"0 0 0 0"  
+        "AbilityGoldCost"		"100 120 140 160"  
+	}
+	"forest_troll_high_priest_heal"
+	{
+		"AbilityCastRange"		"400"
+		"AbilityCooldown"		"10"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"health"			"150"
+			}
+		}
+	}
+	//"item_tpscroll"			"REMOVE"
+}

@@ -1,0 +1,6 @@
+<root>	
+	<Panel>
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/notifications.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/tetris.xml" />
+	</Panel>
+</root>
