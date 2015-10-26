@@ -1,0 +1,32 @@
+.TeamSelect
+{
+    width: 100%;
+    height: 100%;
+}
+
+.TeamSelectPlayer
+{
+    width: 100%;
+    flow-children: right;
+    vertical-align: middle;
+    flow-children: right;
+}
+
+#PlayerName
+{
+    color: white;
+    vertical-align:middle;
+    margin: 3px;
+    text-shadow: 2px 2px 2px black;
+    width: fill-parent-flow( 1 );
+    white-space: nowrap;
+}
+
+DOTAAvatarImage
+{
+    width: 32px;
+    height: 32px;
+    background-color: black;
+	vertical-align:middle;
+}
+

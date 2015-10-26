@@ -237,6 +237,8 @@ function TetrisGameMode:OnThink()
 			GameRules:SetGameWinner(2)
 		end
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
+		print("DOTA_GAMERULES_STATE_POST_GAME")
+		CustomUI:DynamicHud_Create(-1,"END_STATS","file://{resources}/layout/custom_game/end_stats.xml",nil)
 		return nil
 	end
 	return 1

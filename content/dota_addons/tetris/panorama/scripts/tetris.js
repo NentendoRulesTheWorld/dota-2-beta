@@ -255,7 +255,7 @@
 
     function Tstart(){
         // setInterval("if(!over)s.vMove();",500);
-        $.Schedule(1.5,
+        $.Schedule(3,
             (function(){
                 $.Msg("auto move");
                 if(!over)s.vMove();
