@@ -1,0 +1,12 @@
+<root>
+        <styles>
+                <include src="file://{resources}/styles/custom_game/custom_loading_screen.css"/>
+        </styles>
+        <script>
+			$.Msg( "Loading Compiled Panorama Resource!" );
+			$.Msg( "" + $.Language() );
+	</script>
+        <Panel>
+                <Image id="back" class="background" src="file://{images}/custom_game/loading.jpg"/>
+        </Panel>
+</root>
