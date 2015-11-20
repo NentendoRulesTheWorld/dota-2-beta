@@ -1,4 +1,5 @@
 //2 number means a point (x,y),4 points(8 numbers) define a shape
+//2 number means a point (x,y),4 points(8 numbers) define a shape
     //-,L,J,Z,5,O,T
     var over=false,shapes=("0,1,1,1,2,1,3,1;1,0,1,1,1,2,2,2;2,0,2,1,2,2,1,2;0,1,1,1,1,2,2,2;1,2,2,2,2,1,3,1;1,1,2,1,1,2,2,2;0,2,1,2,1,1,2,2").split(";");
     

@@ -1,0 +1,24 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/custom_game/train_army.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/train_army.js" />
+	</scripts>
+	<script>
+		$.Msg( "Compiled Panorama Resource!" );
+	</script>
+	<Panel class="BasePanel">
+        <Panel class="TrainPanel">
+            <Label id="TrainText" text="Train Army here"/>
+            <Panel class="ArmyPanel" 
+                            onmouseover="showinfo_1(1)"
+                            onmouseout="closeinfo_1()"
+                            onactivate="train_1()"
+                            ondblclick=""
+                            oncontextmenu="">
+            </Panel>
+        </Panel>
+    </Panel>
+    
+</root>

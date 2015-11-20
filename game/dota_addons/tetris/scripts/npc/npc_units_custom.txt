@@ -72,6 +72,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"vscript"                   "scripts/vscripts/ai/AI_noSkillUint.lua"
 	}	
 
 
@@ -144,38 +146,7 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"		
 
-        "Creature"
-		{
-			"CanRespawn"				"0"
-
-			//Basic AI State
-			//-----------------------------------------------------------------
-			"States"
-			{
-				"Invade"
-				{
-					"Name"				"Invade"
-					"Aggression"		"50.0"
-					"Avoidance"			"0.0"
-					"Support"			"80.0"
-				}
-			}
-			
-			"DefaultState"				"Invade"
-
-			//Ability Usage Parameters
-			"DefensiveAbilities"           
-        	{
-	            "Ability1"                  
-	            {
-	                "Name"                  "forest_troll_high_priest_heal"
-	                "Heal"                  "1"
-	                "Radius"                "350"
-	                "UseAtHealthPercent"    "70"
-	                "UseSelfishly"          "0"
-	            }
-        	}
-		}
+        "vscript"                   "scripts/vscripts/ai/AI_tetris_forest_troll_high_priest.lua"
 
 	}	
 }

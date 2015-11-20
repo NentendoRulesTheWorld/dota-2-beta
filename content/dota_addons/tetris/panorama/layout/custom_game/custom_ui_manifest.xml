@@ -1,6 +1,8 @@
+//2 number means a point (x,y),4 points(8 numbers) define a shape
 <root>	
 	<Panel>
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/notifications.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/tetris.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/train_army.xml" />
 	</Panel>
 </root>

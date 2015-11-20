@@ -7,6 +7,6 @@
 			$.Msg( "" + $.Language() );
 	</script>
         <Panel>
-                <Image id="back" class="background" src="file://{images}/custom_game/loading.jpg"/>
+                <Image id="back" class="background" src="file://{images}/custom_game/loading.png"/>
         </Panel>
 </root>
