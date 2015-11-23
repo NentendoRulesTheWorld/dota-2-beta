@@ -7,14 +7,14 @@ _G.playerlist = {}
 
 _G.good_base_position = -6500 --calculate to get bad or other position
 
-special_creeper_good = { normal = "npc_dota_creep_goodguys_melee",
-						range = "npc_dota_creep_goodguys_ranged",
+special_creeper_good = { normal = "creep_goodguys_melee_normal",
+						special = "creep_goodguys_melee_special",
 						attacker = "npc_dota_creep_goodguys_melee_upgraded",
 						defencer = "tetris_rock_golem",
 						heeler = "tetris_forest_troll_high_priest"}
 
-special_creeper_bad = {	normal = "npc_dota_creep_badguys_melee",
-						range = "npc_dota_creep_badguys_ranged",
+special_creeper_bad = {	normal = "creep_badguys_melee_normal",
+						special = "creep_badguys_melee_special",
 						attacker = "npc_dota_creep_badguys_melee_upgraded",
 						defencer = "tetris_rock_golem",
 						heeler = "tetris_forest_troll_high_priest"}
@@ -95,53 +95,26 @@ function TetrisGameMode:OnLineRemoved(args)
 	local hero = PlayerResource:GetSelectedHeroEntity(args['PlayerID'])
 	print("hero"..hero_name.."Label"..hero:GetUnitLabel()) 
 	unit_name = ""	
-	exp_gain = 0
-	gold_gain = 0
-
-	if args.count==1 then
-
-		if hero:GetUnitLabel()=="Heeler" then
-			unit_name = special_creeper_good.range
-		elseif hero:GetUnitLabel() then
-			unit_name = special_creeper_good.normal
-		end
-
-		exp_gain = 30
-		gold_gain = 30
-	elseif args.count==2 then
-
-		if hero:GetUnitLabel()=="Heeler" then
-			unit_name = special_creeper_good.range
-		elseif hero:GetUnitLabel() then
-			unit_name = special_creeper_good.normal
-		end
-
-		exp_gain = 70
-		gold_gain = 70
-	elseif args.count==3 then
-
-		if hero:GetUnitLabel()=="Heeler" then
-			unit_name = special_creeper_good.heeler
-		elseif hero:GetUnitLabel()=="Defencer" then
-			unit_name = special_creeper_good.defencer
-		elseif hero:GetUnitLabel() then
-			unit_name = special_creeper_good.attacker
-		end
-
-		exp_gain = 110
-		gold_gain = 110
-	elseif args.count==4 then
-		
-		if hero:GetUnitLabel()=="Heeler" then
-			unit_name = special_creeper_good.heeler
-		elseif hero:GetUnitLabel()=="Defencer" then
-			unit_name = special_creeper_good.defencer
-		elseif hero:GetUnitLabel() then
-			unit_name = special_creeper_good.attacker
-		end
+	exp_gain = 30
+	gold_gain = 30
+	count = 1
+	if args.count==4 then
+		-- if hero:GetUnitLabel()=="Heeler" then
+		-- 	unit_name = special_creeper_good.range
+		-- elseif hero:GetUnitLabel() then
+		-- 	unit_name = special_creeper_good.normal
+		-- end
+		unit_name = special_creeper_good.special
 
 		exp_gain = 180
 		gold_gain = 180
+
+	else
+		unit_name = special_creeper_good.normal
+
+		count = args.count
+		exp_gain = 30*args.count
+		gold_gain = 30*args.count
 	end
 	
 
@@ -151,8 +124,10 @@ function TetrisGameMode:OnLineRemoved(args)
     -- local unit = CreateUnitByName("npc_dota_creep_goodguys_melee_upgraded", Vector(0,-6000,128), false, nil, nil, DOTA_TEAM_GOODGUYS)
     
     print(unit_name)
-    self:spawnUnit(unit_name,team)
-    
+
+    for i=1,count do
+		self:spawnUnit(unit_name,team)
+	end    
 
     --for test if gold useful
     print("getGold"..PlayerResource:GetGold(args['PlayerID']))
@@ -161,6 +136,7 @@ function TetrisGameMode:OnLineRemoved(args)
 end
 
 function TetrisGameMode:TrainArmy(args)
+	print("LUA get target name"..args.target)
 	local team = PlayerResource:GetTeam(args['PlayerID'])
 	self:spawnUnit(args.target,team)
 end

@@ -6,21 +6,21 @@
 	"dazzle_shadow_wave"
 	{
 		"AbilityCastRange"		"15000"
-		"AbilityCooldown"		"0.3"
+		"AbilityCooldown"		"1"
         "AbilityManaCost"		"0 0 0 0"  
         "AbilityGoldCost"		"100 120 140 160"  
 	}
 	"abaddon_aphotic_shield"
 	{
 		"AbilityCastRange"		"15000"
-		"AbilityCooldown"		"0.3"
+		"AbilityCooldown"		"1"
         "AbilityManaCost"		"0 0 0 0"  
         "AbilityGoldCost"		"100 120 140 160"  
 	}
 	"leshrac_lightning_storm"
 	{
 		"AbilityCastRange"		"15000"
-		"AbilityCooldown"		"0.3"
+		"AbilityCooldown"		"1"
         "AbilityManaCost"		"0 0 0 0"  
         "AbilityGoldCost"		"100 120 140 160"  
 	}

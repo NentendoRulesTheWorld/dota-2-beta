@@ -12,9 +12,9 @@
         <Panel class="TrainPanel">
             <Label id="TrainText" text="Train Army here"/>
             <Panel class="ArmyPanel" 
-                            onmouseover="showinfo_1(1)"
+                            onmouseover="showinfo_1()"
                             onmouseout="closeinfo_1()"
-                            onactivate="train_1()"
+                            onactivate="train_1(1)"
                             ondblclick=""
                             oncontextmenu="">
             </Panel>

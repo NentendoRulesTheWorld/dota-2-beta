@@ -6,7 +6,7 @@
 
 .TrainPanel
 {
-    width: 150px;
+    width: 155px;
     height: 135px;
 
     background-image: url( "file://{images}/custom_game/background.jpg" );
@@ -19,7 +19,7 @@
 }
 /*
 5-20-5-30-5-20-5-30-5
-10-30-5-30-5-30-5-30-5
+10-30-5-30-5-30-5-30-10
 3*4*/
 .ArmyPanel
 {
